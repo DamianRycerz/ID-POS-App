@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, of } from 'rxjs';
 import { inject } from '@angular/core';
 import { PersonDTO } from './person.dto';
 
@@ -7,8 +7,14 @@ export class PeopleHttpService {
   private readonly httpClient: HttpClient = inject(HttpClient);
 
   getPerson(peopleId: number): Observable<PersonDTO> {
-    return this.httpClient.get<PersonDTO>(
-      `https://www.swapi.tech/api/people/${peopleId}`
-    );
+    return this.httpClient
+      .get<PersonDTO>(`https://www.swapi.tech/api/people/${peopleId}`)
+      .pipe(
+        catchError(() => {
+          console.error('TWOJ STATEK SIE ROZBIL');
+
+          return EMPTY;
+        })
+      );
   }
 }
