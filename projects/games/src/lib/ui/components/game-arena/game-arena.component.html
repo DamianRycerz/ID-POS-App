@@ -3,3 +3,6 @@
 
 <button (click)="setPlayer1ShipData()">PLAYER 1 SHIP</button>
 <button (click)="setPlayer2ShipData()">PLAYER 2 SHIP</button>
+
+
+<button  (click)="showWinner()" [disabled]="!(isShowWinnerActive$ | async)">SHOW WINNER</button>

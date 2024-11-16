@@ -11,7 +11,7 @@ export class PeopleHttpService {
       .get<PersonDTO>(`https://www.swapi.tech/api/people/${peopleId}`)
       .pipe(
         catchError(() => {
-          console.error('TWOJ STATEK SIE ROZBIL');
+          console.error('TWOJA KARTA JEST PUSTA');
 
           return EMPTY;
         })

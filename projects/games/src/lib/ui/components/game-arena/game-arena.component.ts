@@ -1,45 +1,66 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
+  IsShowWinnerActiveQueryHandler,
   SetPersonAttributesCommandHandler,
   SetShipDataCommandHandler,
+  ShowWinnerCommandHandler,
 } from '../../../application/handlers';
 import { PlayerEnum } from '@core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-game-arena',
   templateUrl: './game-arena.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [],
-  providers: [SetPersonAttributesCommandHandler, SetShipDataCommandHandler],
+  imports: [AsyncPipe, NgIf],
+  providers: [
+    SetPersonAttributesCommandHandler,
+    SetShipDataCommandHandler,
+    ShowWinnerCommandHandler,
+    IsShowWinnerActiveQueryHandler,
+  ],
 })
 export class GameArenaComponent {
   private readonly setPersonAttributesCommandHandler: SetPersonAttributesCommandHandler =
     inject(SetPersonAttributesCommandHandler);
   private readonly setShipDataCommandHandler: SetShipDataCommandHandler =
     inject(SetShipDataCommandHandler);
+  private readonly showWinnerCommandHandler: ShowWinnerCommandHandler = inject(
+    ShowWinnerCommandHandler
+  );
+  private readonly isShowWinnerActiveQueryHandler: IsShowWinnerActiveQueryHandler =
+    inject(IsShowWinnerActiveQueryHandler);
 
-  setPlayer1Attiributes() {
+  readonly isShowWinnerActive$: Observable<boolean> =
+    this.isShowWinnerActiveQueryHandler.isShowWinnerActive();
+
+  setPlayer1Attiributes(): void {
     this.setPersonAttributesCommandHandler
       .setAttributes(PlayerEnum.PLAYER_ONE)
       .subscribe();
   }
 
-  setPlayer2Attributes() {
+  setPlayer2Attributes(): void {
     this.setPersonAttributesCommandHandler
       .setAttributes(PlayerEnum.PLAYER_TWO)
       .subscribe();
   }
 
-  setPlayer1ShipData() {
+  setPlayer1ShipData(): void {
     this.setShipDataCommandHandler
       .setShipData(PlayerEnum.PLAYER_ONE)
       .subscribe();
   }
 
-  setPlayer2ShipData() {
+  setPlayer2ShipData(): void {
     this.setShipDataCommandHandler
       .setShipData(PlayerEnum.PLAYER_TWO)
       .subscribe();
+  }
+
+  showWinner(): void {
+    this.showWinnerCommandHandler.show().subscribe();
   }
 }

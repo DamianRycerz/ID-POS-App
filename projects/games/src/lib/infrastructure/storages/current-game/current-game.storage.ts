@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { PlayerData } from './player-data.model';
 import { PlayerEnum } from '@core';
 
@@ -13,7 +13,7 @@ export class CurrentGameStorage {
   private readonly playerOneSubject: BehaviorSubject<PlayerData> =
     new BehaviorSubject<PlayerData>(INIT_STATE);
   private readonly playerTwoSubject: BehaviorSubject<PlayerData> =
-    new BehaviorSubject<PlayerData>({ ...INIT_STATE, playerName: 'Tomek' });
+    new BehaviorSubject<PlayerData>(INIT_STATE);
 
   readonly playerOne$: Observable<PlayerData> =
     this.playerOneSubject.asObservable();
@@ -33,10 +33,16 @@ export class CurrentGameStorage {
 
     const actualValues: PlayerData = selectedSubject[selectedPLayer].value;
 
-    return of(void 0).pipe(
+    return selectedSubject[selectedPLayer].asObservable().pipe(
+      take(1),
       tap(() =>
         selectedSubject[selectedPLayer].next({ ...actualValues, ...data })
       )
     );
+  }
+
+  clear(): void {
+    this.playerOneSubject.next(INIT_STATE);
+    this.playerTwoSubject.next(INIT_STATE);
   }
 }

@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GameArenaComponent } from '../ui/components';
-import { CurrentGameStorage } from '../infrastructure/storages';
+import {
+  CurrentGameStorage,
+  GamesHistoryStorage,
+} from '../infrastructure/storages';
 import {
   PeopleHttpService,
   ShipsHttpService,
@@ -12,6 +15,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [GameArenaComponent],
-  providers: [CurrentGameStorage, PeopleHttpService, ShipsHttpService],
+  providers: [
+    CurrentGameStorage,
+    GamesHistoryStorage,
+    PeopleHttpService,
+    ShipsHttpService,
+  ],
 })
 export class HomePage {}
