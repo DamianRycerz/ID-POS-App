@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@games": ["projects/games/src/index.ts"]
+      "@games": ["projects/games/src/index.ts"],
+      "@core": ["projects/core/src/index.ts"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

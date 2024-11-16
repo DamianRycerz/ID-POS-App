@@ -1,5 +1,6 @@
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { PlayerData } from './player-data.model';
+import { PlayerEnum } from '@core';
 
 const INIT_STATE: PlayerData = {
   weight: 0,
@@ -37,9 +38,4 @@ export class CurrentGameStorage {
       )
     );
   }
-}
-
-enum PlayerEnum {
-  PLAYER_ONE = 'PLAYER_ONE',
-  PLAYER_TWO = 'PLAYER_TWO',
 }
