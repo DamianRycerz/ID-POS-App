@@ -1,6 +1,25 @@
 {
   "name": "idpos-app",
   "version": "0.0.0",
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "printWidth": 120,
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "endOfLine": "auto",
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "bracketSameLine": true,
+          "parser": "html",
+          "printWidth": 120,
+          "tabWidth": 2
+        }
+      }
+    ]
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

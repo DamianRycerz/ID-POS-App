@@ -11,12 +11,10 @@ import { GameHistoryModel } from '../../../application/models/game-history.model
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [NgForOf, AsyncPipe, NgIf, NgClass],
-  providers: [GetGamesHistoryQueryHandler],
+  providers: [GetGamesHistoryQueryHandler]
 })
 export class GamesHistoryComponent {
-  private readonly getGamesHistoryQueryHandler: GetGamesHistoryQueryHandler =
-    inject(GetGamesHistoryQueryHandler);
+  private readonly getGamesHistoryQueryHandler: GetGamesHistoryQueryHandler = inject(GetGamesHistoryQueryHandler);
 
-  readonly history$: Observable<GameHistoryModel> =
-    this.getGamesHistoryQueryHandler.history();
+  readonly history$: Observable<GameHistoryModel> = this.getGamesHistoryQueryHandler.history();
 }

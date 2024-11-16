@@ -7,14 +7,12 @@ export class PeopleHttpService {
   private readonly httpClient: HttpClient = inject(HttpClient);
 
   getPerson(peopleId: number): Observable<PersonDTO> {
-    return this.httpClient
-      .get<PersonDTO>(`https://www.swapi.tech/api/people/${peopleId}`)
-      .pipe(
-        catchError(() => {
-          console.error('TWOJA KARTA JEST PUSTA');
+    return this.httpClient.get<PersonDTO>(`https://www.swapi.tech/api/people/${peopleId}`).pipe(
+      catchError(() => {
+        console.error('TWOJA KARTA JEST PUSTA');
 
-          return EMPTY;
-        })
-      );
+        return EMPTY;
+      })
+    );
   }
 }

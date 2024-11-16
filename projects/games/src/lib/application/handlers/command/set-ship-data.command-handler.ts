@@ -1,17 +1,12 @@
-import {
-  ShipDTO,
-  ShipsHttpService,
-} from '../../../infrastructure/http-services';
+import { ShipDTO, ShipsHttpService } from '../../../infrastructure/http-services';
 import { inject } from '@angular/core';
 import { CurrentGameStorage } from '../../../infrastructure/storages';
 import { EMPTY, of, switchMap } from 'rxjs';
 import { PlayerEnum } from '@core';
 
 export class SetShipDataCommandHandler {
-  private readonly shipsHttpService: ShipsHttpService =
-    inject(ShipsHttpService);
-  private readonly currentGameStorage: CurrentGameStorage =
-    inject(CurrentGameStorage);
+  private readonly shipsHttpService: ShipsHttpService = inject(ShipsHttpService);
+  private readonly currentGameStorage: CurrentGameStorage = inject(CurrentGameStorage);
 
   setShipData(selectedPlayer: PlayerEnum) {
     const randomId: number = Math.floor(Math.random() * 100);
@@ -27,9 +22,7 @@ export class SetShipDataCommandHandler {
 
         return of(crew);
       }),
-      switchMap((crew: number) =>
-        this.currentGameStorage.patchPlayerResult({ crew }, selectedPlayer)
-      )
+      switchMap((crew: number) => this.currentGameStorage.patchPlayerResult({ crew }, selectedPlayer))
     );
   }
 }

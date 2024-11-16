@@ -1,7 +1,4 @@
-import {
-  PeopleHttpService,
-  PersonDTO,
-} from '../../../infrastructure/http-services';
+import { PeopleHttpService, PersonDTO } from '../../../infrastructure/http-services';
 import { inject } from '@angular/core';
 import { CurrentGameStorage } from '../../../infrastructure/storages';
 import { EMPTY, map, Observable, of, switchMap } from 'rxjs';
@@ -9,10 +6,8 @@ import { PlayerEnum } from '@core';
 import { PersonAttributesModel } from '../../models';
 
 export class SetPersonAttributesCommandHandler {
-  private readonly peopleHttpService: PeopleHttpService =
-    inject(PeopleHttpService);
-  private readonly currentGameStorage: CurrentGameStorage =
-    inject(CurrentGameStorage);
+  private readonly peopleHttpService: PeopleHttpService = inject(PeopleHttpService);
+  private readonly currentGameStorage: CurrentGameStorage = inject(CurrentGameStorage);
 
   setAttributes(selectedPlayer: PlayerEnum): Observable<void> {
     const randomId: number = Math.floor(Math.random() * 100);
@@ -28,9 +23,7 @@ export class SetPersonAttributesCommandHandler {
 
         return of(data);
       }),
-      switchMap((data: PersonAttributesModel) =>
-        this.currentGameStorage.patchPlayerResult(data, selectedPlayer)
-      ),
+      switchMap((data: PersonAttributesModel) => this.currentGameStorage.patchPlayerResult(data, selectedPlayer)),
       map(() => void 0)
     );
   }
@@ -38,7 +31,7 @@ export class SetPersonAttributesCommandHandler {
   private mapToPlayerData(person: PersonDTO) {
     return {
       weight: +person.result.properties.mass,
-      height: +person.result.properties.height,
+      height: +person.result.properties.height
     };
   }
 }

@@ -7,14 +7,12 @@ export class ShipsHttpService {
   private readonly httpClient: HttpClient = inject(HttpClient);
 
   getShipData(shipId: number): Observable<ShipDTO> {
-    return this.httpClient
-      .get<ShipDTO>(`https://www.swapi.tech/api/starships/${shipId}`)
-      .pipe(
-        catchError(() => {
-          console.error('TWOJ STATEK SIE ROZBIL');
+    return this.httpClient.get<ShipDTO>(`https://www.swapi.tech/api/starships/${shipId}`).pipe(
+      catchError(() => {
+        console.error('TWOJ STATEK SIE ROZBIL');
 
-          return EMPTY;
-        })
-      );
+        return EMPTY;
+      })
+    );
   }
 }

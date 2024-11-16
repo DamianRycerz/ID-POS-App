@@ -2,11 +2,9 @@ import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 import { GameHistory } from './game-history.model';
 
 export class GamesHistoryStorage {
-  private readonly gameHistorySubject: BehaviorSubject<GameHistory[]> =
-    new BehaviorSubject<GameHistory[]>([]);
+  private readonly gameHistorySubject: BehaviorSubject<GameHistory[]> = new BehaviorSubject<GameHistory[]>([]);
 
-  readonly gameHistory$: Observable<GameHistory[]> =
-    this.gameHistorySubject.asObservable();
+  readonly gameHistory$: Observable<GameHistory[]> = this.gameHistorySubject.asObservable();
 
   constructor() {
     this.gameHistory$.subscribe((x) => console.log(x));

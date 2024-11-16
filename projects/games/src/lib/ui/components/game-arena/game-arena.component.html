@@ -1,25 +1,16 @@
 <ng-container
   *ngIf="{
     isShowWinnerActive: isShowWinnerActive$ | async
-  } as data"
->
-  <div
-    class="or-d-flex or-justify-content-between or-align-items-center or-p-12-px"
-  >
-    <div
-      class="or-d-flex or-flex-col or-align-items-center or-justify-content-center"
-    >
+  } as data">
+  <div class="or-d-flex or-justify-content-between or-align-items-center or-p-12-px">
+    <div class="or-d-flex or-flex-col or-align-items-center or-justify-content-center">
       <img src="assets/player-one.svg" class="or-responsive-img" />
       <button
         (click)="setPlayer1Attiributes()"
-        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer"
-      >
+        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer">
         Losuj kartę!
       </button>
-      <button
-        (click)="setPlayer1ShipData()"
-        class="or-action-button or-p-4-px or-head-sm or-cursor-pointer"
-      >
+      <button (click)="setPlayer1ShipData()" class="or-action-button or-p-4-px or-head-sm or-cursor-pointer">
         Sprawdź swoją załogę!
       </button>
     </div>
@@ -32,25 +23,18 @@
             ? 'or-cursor-not-allowed or-action-button-disabled'
             : ''
         "
-        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer"
-      >
+        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer">
         SHOW WINNER
       </button>
     </div>
-    <div
-      class="or-d-flex or-flex-col or-align-items-center or-justify-content-center"
-    >
+    <div class="or-d-flex or-flex-col or-align-items-center or-justify-content-center">
       <img src="assets/player-two.svg" class="or-responsive-img" />
       <button
         (click)="setPlayer2Attributes()"
-        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer"
-      >
+        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer">
         Losuj kartę!
       </button>
-      <button
-        (click)="setPlayer2ShipData()"
-        class="or-action-button or-p-4-px or-head-sm or-cursor-pointer"
-      >
+      <button (click)="setPlayer2ShipData()" class="or-action-button or-p-4-px or-head-sm or-cursor-pointer">
         Sprawdź swoją załogę!
       </button>
     </div>
