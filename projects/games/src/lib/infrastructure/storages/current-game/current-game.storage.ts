@@ -17,11 +17,11 @@ export class CurrentGameStorage {
   readonly playerOne$: Observable<PlayerData> =
     this.playerOneSubject.asObservable();
   readonly playerTwo$: Observable<PlayerData> =
-    this.playerOneSubject.asObservable();
+    this.playerTwoSubject.asObservable();
 
   constructor() {
-    this.playerOne$.subscribe((x) => console.log(x));
-    this.playerTwo$.subscribe((x) => console.log(x));
+    this.playerOne$.subscribe((x) => console.log('ONE: ', x));
+    this.playerTwo$.subscribe((x) => console.log('TWO: ', x));
   }
 
   patchPlayerResult(data: Partial<PlayerData>, selectedPLayer: PlayerEnum) {

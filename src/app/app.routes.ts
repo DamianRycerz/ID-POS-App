@@ -1,4 +1,4 @@
 import { Routes } from '@angular/router';
-import { GameArenaComponent } from '@games';
+import { HomePage } from '@games';
 
-export const routes: Routes = [{ path: '', component: GameArenaComponent }];
+export const routes: Routes = [{ path: '', component: HomePage }];
