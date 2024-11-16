@@ -1,0 +1,19 @@
+@import "./mixins";
+
+$or-positions: (static, relative, absolute, fixed, sticky);
+
+$or-position: (
+  position: (
+    position,
+  ),
+);
+
+@each $position-key, $position-value in $or-position {
+  @include create-responsive-class-without-units-from-array-with-important(
+    $position-key,
+    $or-positions,
+    (
+      responsive: $position-value,
+    )
+  );
+}

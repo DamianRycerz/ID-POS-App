@@ -1,0 +1,342 @@
+@import "./mixins";
+@import "./variables";
+
+.or-flex-0 {
+  flex: 0;
+}
+
+.or-flex-1 {
+  flex: 1;
+}
+
+.or-flex-auto {
+  flex: auto;
+}
+
+$or-flex-directions-map: (
+  col: column,
+  col-rev: column-reverse,
+  row: row,
+  row-rev: row-reverse,
+);
+
+$or-flex-direction-map: (
+  flex: (
+    flex-direction,
+  ),
+);
+
+@each $direction-key, $direction-value in $or-flex-directions-map {
+  @each $class-name-key, $property-value in $or-flex-direction-map {
+    @include create-responsive-class-without-units-from-maps-with-important(
+      $class-name-key,
+      $or-flex-directions-map,
+      (
+        responsive: $property-value,
+      )
+    );
+  }
+}
+
+$or-justify-content-options-map: (
+  start: (
+    flex-start,
+  ),
+  end: (
+    flex-end,
+  ),
+  center: (
+    center,
+  ),
+  between: (
+    space-between,
+  ),
+  around: (
+    space-around,
+  ),
+  evenly: (
+    space-evenly,
+  ),
+  stretch: (
+    stretch,
+  ),
+);
+
+$or-justify-content-map: (
+  justify-content: (
+    justify-content,
+  ),
+);
+
+@each $justify-key, $justify-value in $or-justify-content-options-map {
+  @each $class-name-key, $property-value in $or-justify-content-map {
+    @include create-responsive-class-without-units-from-maps-with-important(
+      $class-name-key,
+      $or-justify-content-options-map,
+      (
+        responsive: $property-value,
+      )
+    );
+  }
+}
+
+$or-align-items-options-map: (
+  start: (
+    flex-start,
+  ),
+  end: (
+    flex-end,
+  ),
+  stretch: (
+    stretch,
+  ),
+  center: (
+    center,
+  ),
+  baseline: (
+    baseline,
+  ),
+);
+
+$or-align-items-map: (
+  align-items: (
+    align-items,
+  ),
+);
+
+@each $align-items-key, $align-items-value in $or-align-items-options-map {
+  @each $class-name-key, $property-value in $or-align-items-map {
+    @include create-responsive-class-without-units-from-maps-with-important(
+      $class-name-key,
+      $or-align-items-options-map,
+      (
+        responsive: $property-value,
+      )
+    );
+  }
+}
+
+$or-align-self-options-map: (
+  auto: (
+    auto,
+  ),
+  start: (
+    flex-start,
+  ),
+  end: (
+    flex-end,
+  ),
+  stretch: (
+    stretch,
+  ),
+  center: (
+    center,
+  ),
+  baseline: (
+    baseline,
+  ),
+);
+
+$or-align-self-map: (
+  align-self: (
+    align-self,
+  ),
+);
+
+@each $align-self-key, $align-self-value in $or-align-self-options-map {
+  @each $class-name-key, $property-value in $or-align-self-map {
+    @include create-responsive-class-without-units-from-maps-with-important(
+      $class-name-key,
+      $or-align-self-options-map,
+      (
+        responsive: $property-value,
+      )
+    );
+  }
+}
+
+$or-align-content-options-map: (
+  start: (
+    flex-start,
+  ),
+  end: (
+    flex-end,
+  ),
+  stretch: (
+    stretch,
+  ),
+  center: (
+    center,
+  ),
+  between: (
+    space-between,
+  ),
+  around: (
+    space-around,
+  ),
+  evenly: (
+    space-evenly,
+  ),
+);
+
+$or-align-content-map: (
+  align-content: (
+    align-content,
+  ),
+);
+
+@each $align-self-key, $align-self-value in $or-align-content-options-map {
+  @each $class-name-key, $property-value in $or-align-content-map {
+    @include create-responsive-class-without-units-from-maps-with-important(
+      $class-name-key,
+      $or-align-content-options-map,
+      (
+        responsive: $property-value,
+      )
+    );
+  }
+}
+
+$or-text-alignment-property: (
+  text-align: (
+    text-align,
+  ),
+);
+
+$or-text-alignment-options-array: (center, start, end, justify);
+
+@each $text-align-class-name,
+  $text-align-property-value in $or-text-alignment-property
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $text-align-class-name,
+    $or-text-alignment-options-array,
+    (
+      responsive: $text-align-property-value,
+    )
+  );
+}
+
+$or-flex-grow-shrink-specific-property-values: (
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  unset,
+  inherit,
+  initial,
+  revert,
+  revert-layer
+);
+
+$or-flex-basis-available-values: (
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  max-content,
+  min-content,
+  fit-content,
+  content,
+  inherit,
+  initial,
+  revert,
+  revert-layer,
+  unset,
+  auto
+);
+
+$or-flex-grow-shrink-map: (
+  flex-grow: (
+    flex-grow,
+  ),
+  flex-shrink: (
+    flex-shrink,
+  ),
+);
+
+$or-flex-basis-map: (
+  flex-basis: (
+    flex-basis,
+  ),
+);
+
+@each $or-flex-grow-key,
+  $or-flex-grow-value in $or-flex-grow-shrink-map
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $or-flex-grow-key,
+    $or-flex-grow-shrink-specific-property-values,
+    (
+      responsive: $or-flex-grow-value,
+    )
+  );
+}
+
+@each $or-flex-basis-key, $or-flex-basis-value in $or-flex-basis-map {
+  @include create-responsive-class-without-units-from-array-with-important(
+    $or-flex-basis-key,
+    $or-flex-basis-available-values,
+    (
+      responsive: $or-flex-basis-value,
+    )
+  );
+}
+
+$or-flex-wrap-possible-values: (wrap, nowrap, wrap-reverse);
+
+$or-flex-wrap-property: (
+  flex: (
+    flex-wrap,
+  ),
+);
+
+@each $flex-wrap-name, $flex-wrap-value in $or-flex-wrap-property {
+  @include create-responsive-class-without-units-from-array-with-important(
+    $flex-wrap-name,
+    $or-flex-wrap-possible-values,
+    (
+      responsive: $flex-wrap-value,
+    )
+  );
+}
+
+$or-flex-gap-properties: (
+  gap: (
+    gap,
+  ),
+  row-gap: (
+    row-gap,
+  ),
+  col-gap: (
+    column-gap,
+  ),
+  grid-row-gap: (
+    grid-row-gap,
+  ),
+);
+
+@each $flex-gap-key, $flex-gap-value in $or-flex-gap-properties {
+  @include create-responsive-class-from-maps-with-important(
+    $flex-gap-key,
+    $available-px-map,
+    (
+      responsive: $flex-gap-value,
+    ),
+    px
+  );
+
+  @include create-responsive-percentage-class-from-array-with-important(
+    $flex-gap-key,
+    $available-percentage-values-full,
+    (
+      responsive: $flex-gap-value,
+    )
+  );
+}

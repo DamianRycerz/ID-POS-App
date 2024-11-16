@@ -1,0 +1,322 @@
+@import "./mixins";
+@import "./variables";
+
+$margin-full-only: (
+  m: (
+    margin,
+  ),
+);
+
+$available-word-based-full-margin-property-values: (auto, inherit);
+
+$margin-vertical-horizontal-properties: (
+  my: (
+    margin-top,
+    margin-bottom,
+  ),
+  mx: (
+    margin-left,
+    margin-right,
+  ),
+);
+
+$margin-multiple-properties: (
+  m: (
+    margin,
+  ),
+  my: (
+    margin-top,
+    margin-bottom,
+  ),
+  mx: (
+    margin-left,
+    margin-right,
+  ),
+);
+
+$margin-specific-properties: (
+  mt: (
+    margin-top,
+  ),
+  ml: (
+    margin-left,
+  ),
+  mb: (
+    margin-bottom,
+  ),
+  mr: (
+    margin-right,
+  ),
+);
+
+$available-word-based-specific-margin-properties: (auto, initial, inherit);
+
+$margin-properties: map-merge(
+  $margin-multiple-properties,
+  $margin-specific-properties
+);
+
+$padding-full-only: (
+  p: (
+    padding,
+  ),
+);
+
+$available-word-based-full-padding-property-values: (inherit);
+
+$padding-vertical-horizontal-properties: (
+  py: (
+    padding-top,
+    padding-bottom,
+  ),
+  px: (
+    padding-left,
+    padding-right,
+  ),
+);
+
+$padding-multiple-properties: (
+  p: (
+    padding,
+  ),
+  py: (
+    padding-top,
+    padding-bottom,
+  ),
+  px: (
+    padding-left,
+    padding-right,
+  ),
+);
+
+$padding-specific-properties: (
+  pt: (
+    padding-top,
+  ),
+  pl: (
+    padding-left,
+  ),
+  pb: (
+    padding-bottom,
+  ),
+  pr: (
+    padding-right,
+  ),
+);
+
+$available-word-based-specific-padding-property-values: (inherit, initial);
+
+$padding-properties: map-merge(
+  $padding-multiple-properties,
+  $padding-specific-properties
+);
+
+@each $margin-prop-name, $margin-prop-value in $margin-properties {
+  @include create-responsive-pixel-class-from-array-with-important(
+    $margin-prop-name,
+    $variables-options-pixel-size,
+    (
+      responsive: $margin-prop-value,
+    )
+  );
+}
+
+@each $padding-prop-name, $padding-prop-value in $padding-properties {
+  @include create-responsive-pixel-class-from-array-with-important(
+    $padding-prop-name,
+    $variables-options-pixel-size,
+    (
+      responsive: $padding-prop-value,
+    )
+  );
+}
+
+@each $margin-property-name,
+  $margin-property-values in $margin-multiple-properties
+{
+  @include create-responsive-percentage-class-from-array-with-important(
+    $margin-property-name,
+    $available-percentage-values-full,
+    (
+      responsive: $margin-property-values,
+    )
+  );
+}
+
+@each $margin-property-name,
+  $margin-property-values in $margin-specific-properties
+{
+  @include create-responsive-percentage-class-from-array-with-important(
+    $margin-property-name,
+    $available-percentage-values-specific,
+    (
+      responsive: $margin-property-values,
+    )
+  );
+}
+
+@each $padding-property-name,
+  $padding-property-values in $padding-multiple-properties
+{
+  @include create-responsive-percentage-class-from-array-with-important(
+    $padding-property-name,
+    $available-percentage-values-full,
+    (
+      responsive: $padding-property-values,
+    )
+  );
+}
+
+@each $padding-property-name,
+  $padding-property-values in $padding-specific-properties
+{
+  @include create-responsive-percentage-class-from-array-with-important(
+    $padding-property-name,
+    $available-percentage-values-specific,
+    (
+      responsive: $padding-property-values,
+    )
+  );
+}
+
+@each $full-margin-property-name,
+  $full-margin-property-value in $margin-full-only
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $full-margin-property-name,
+    $available-word-based-full-margin-property-values,
+    (
+      responsive: $full-margin-property-value,
+    )
+  );
+}
+
+@each $vh-margin-property-name,
+  $vh-margin-property-value in $margin-vertical-horizontal-properties
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $vh-margin-property-name,
+    $available-word-based-specific-margin-properties,
+    (
+      responsive: $vh-margin-property-value,
+    )
+  );
+}
+
+@each $specific-margin-property-name,
+  $specific-margin-property-value in $margin-specific-properties
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $specific-margin-property-name,
+    $available-word-based-specific-margin-properties,
+    (
+      responsive: $specific-margin-property-value,
+    )
+  );
+}
+
+@each $full-padding-property-name,
+  $full-padding-property-value in $padding-full-only
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $full-padding-property-name,
+    $available-word-based-full-padding-property-values,
+    (
+      responsive: $full-padding-property-value,
+    )
+  );
+}
+
+@each $vh-padding-property-name,
+  $vh-padding-property-value in $padding-vertical-horizontal-properties
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $vh-padding-property-name,
+    $available-word-based-specific-padding-property-values,
+    (
+      responsive: $vh-padding-property-value,
+    )
+  );
+}
+
+@each $specific-padding-property-name,
+  $specific-padding-property-value in $padding-specific-properties
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $specific-padding-property-name,
+    $available-word-based-specific-padding-property-values,
+    (
+      responsive: $specific-padding-property-value,
+    )
+  );
+}
+
+$or-positioning-property-map: (
+  top: (
+    top,
+  ),
+  bottom: (
+    bottom,
+  ),
+  left: (
+    left,
+  ),
+  right: (
+    right,
+  ),
+);
+
+@each $positioning-prop-name,
+  $positioning-prop-value in $or-positioning-property-map
+{
+  @include create-responsive-pixel-class-from-array-with-important(
+    $positioning-prop-name,
+    $variables-options-pixel-size,
+    (
+      responsive: $positioning-prop-value,
+    )
+  );
+}
+
+@each $positioning-property-key,
+  $positioning-property-value in $or-positioning-property-map
+{
+  @include create-responsive-class-from-maps-with-important(
+    $positioning-property-key,
+    $available-px-map,
+    (
+      responsive: $positioning-property-value,
+    ),
+    px
+  );
+
+  @include create-responsive-percentage-class-from-array-with-important(
+    $positioning-property-key,
+    $available-percentage-values-full,
+    (
+      responsive: $positioning-property-value,
+    )
+  );
+}
+
+@each $margin-property-name, $margin-property-values in $margin-properties {
+  @include create-responsive-class-from-maps-with-important(
+    $margin-property-name,
+    $available-px-map,
+    (
+      responsive: $margin-property-values,
+    ),
+    px
+  );
+}
+
+@each $padding-property-name, $padding-property-values in $padding-properties {
+  @include create-responsive-class-from-maps-with-important(
+    $padding-property-name,
+    $available-px-map,
+    (
+      responsive: $padding-property-values,
+    ),
+    px
+  );
+}

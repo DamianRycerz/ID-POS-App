@@ -1,0 +1,31 @@
+@import "./mixins";
+
+$or-display-array: (
+  block,
+  flex,
+  grid,
+  contents,
+  inline,
+  inline-block,
+  inline-flex,
+  inline-grid,
+  initial,
+  inherit,
+  none
+);
+
+$or-display-property: (
+  d: (
+    display,
+  ),
+);
+
+@each $display-d, $display-display in $or-display-property {
+  @include create-responsive-class-without-units-from-array-with-important(
+    $display-d,
+    $or-display-array,
+    (
+      responsive: $display-display,
+    )
+  );
+}

@@ -1,0 +1,132 @@
+@import "./mixins";
+@import "./variables";
+
+
+$size-properties-map: (
+  h: (
+    height,
+    --height,
+  ),
+  min-h: (
+    min-height,
+    --min-height,
+  ),
+  max-h: (
+    max-height,
+    --max-height,
+  ),
+  w: (
+    width,
+    --width,
+  ),
+  min-w: (
+    min-width,
+    --min-width,
+  ),
+  max-w: (
+    max-width,
+    --max-width,
+  ),
+  size: (
+    width,
+    --width,
+    height,
+    --height,
+  ),
+);
+
+$width-and-height-properties-map: (
+  h: (
+    height,
+    --height,
+  ),
+  w: (
+    width,
+    --width,
+  ),
+);
+
+$non-numeric-sizing-values: (fit-content, max-content, min-content);
+
+@each $size-prop-name, $size-prop-value in $size-properties-map {
+  @include create-responsive-pixel-class-from-array-with-important(
+    $size-prop-name,
+    $variables-options-pixel-size,
+    (
+      responsive: $size-prop-value,
+    )
+  );
+}
+
+@each $size-prop-name, $size-prop-value in $width-and-height-properties-map {
+  @include create-responsive-pixel-class-from-array-with-important(
+    $size-prop-name,
+    $variables-options-pixel-size,
+    (
+      responsive: $size-prop-value,
+    )
+  );
+}
+
+@each $size-property-name, $size-property-value in $size-properties-map {
+  @include create-responsive-class-without-units-from-array-with-important(
+    $size-property-name,
+    $non-numeric-sizing-values,
+    (
+      responsive: $size-property-value,
+    )
+  );
+}
+
+@each $size-property-name,
+  $size-property-value in $width-and-height-properties-map
+{
+  @include create-responsive-class-without-units-from-array-with-important(
+    $size-property-name,
+    auto,
+    (
+      responsive: $size-property-value,
+    )
+  );
+}
+
+@each $size-property-name, $size-property-value in $size-properties-map {
+  @include create-responsive-percentage-class-from-array-with-important(
+    $size-property-name,
+    $available-percentage-values-specific,
+    (
+      responsive: $size-property-value,
+    )
+  );
+}
+
+.or-w-100vw {
+  width: 100vw !important;
+  --width: 100vw !important;
+}
+
+.or-h-100vh {
+  height: 100vh !important;
+  --height: 100vh !important;
+}
+
+.or-w-100dvw {
+  width: 100dvw !important;
+  --width: 100dvw !important;
+}
+
+.or-h-100dvh {
+  height: 100dvh !important;
+  --height: 100dvh !important;
+}
+
+@each $size-property-name, $size-property-value in $size-properties-map {
+  @include create-responsive-class-from-maps-with-important(
+    $size-property-name,
+    map-merge($available-px-map, $available-px-extended-map),
+    (
+      responsive: $size-property-value,
+    ),
+    px
+  );
+}

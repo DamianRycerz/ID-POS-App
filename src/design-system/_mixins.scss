@@ -1,0 +1,279 @@
+@import "./breakpoints";
+
+@mixin respond-above-breakpoint($breakpoint-name) {
+  @if map-has-key($or-grid-breakpoints, $breakpoint-name) {
+    $breakpoint-value: map-get($or-grid-breakpoints, $breakpoint-name);
+
+    @media screen and (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint provided: #{$breakpoint-name}';
+  }
+}
+
+@mixin create-responsive-class-properties($value, $class-properties, $unit) {
+  $responsive-properties: map-get($class-properties, "responsive");
+
+  @if $responsive-properties {
+    @each $property-name in $responsive-properties {
+      #{$property-name}: #{$value}#{if($unit, $unit, "")};
+    }
+  }
+}
+
+@mixin create-responsive-class-from-maps(
+  $class-prop-name,
+  $available-values,
+  $class-properties,
+  $unit
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $key, $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$key} {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties(
+            $value,
+            $class-properties,
+            $unit
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties(
+              $value,
+              $class-properties,
+              $unit
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-responsive-percentage-class-from-array(
+  $class-prop-name,
+  $available-values,
+  $class-properties
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$value}-pc {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties(
+            $value,
+            $class-properties,
+            #{"%"}
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties(
+              $value,
+              $class-properties,
+              #{"%"}
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-responsive-class-without-units-from-array(
+  $class-prop-name,
+  $available-values,
+  $class-properties
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$value} {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties(
+            $value,
+            $class-properties,
+            ""
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties(
+              $value,
+              $class-properties,
+              ""
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-responsive-class-properties-with-important(
+  $value,
+  $class-properties,
+  $unit
+) {
+  $responsive-properties: map-get($class-properties, "responsive");
+
+  @if $responsive-properties {
+    @each $property-name in $responsive-properties {
+      #{$property-name}: #{$value}#{if($unit, $unit, "")} !important;
+    }
+  }
+}
+
+@mixin create-responsive-class-from-maps-with-important(
+  $class-prop-name,
+  $available-values,
+  $class-properties,
+  $unit
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $key, $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$key} {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties-with-important(
+            $value,
+            $class-properties,
+            $unit
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties-with-important(
+              $value,
+              $class-properties,
+              $unit
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-responsive-class-without-units-from-maps-with-important(
+  $class-prop-name,
+  $available-values,
+  $class-properties
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $key, $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$key} {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties-with-important(
+            $value,
+            $class-properties,
+            ""
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties-with-important(
+              $value,
+              $class-properties,
+              ""
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-responsive-pixel-class-from-array-with-important(
+  $class-prop-name,
+  $available-values,
+  $class-properties
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$value}-px {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties-with-important(
+            $value,
+            $class-properties,
+            px
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties-with-important(
+              $value,
+              $class-properties,
+              px
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-responsive-percentage-class-from-array-with-important(
+  $class-prop-name,
+  $available-values,
+  $class-properties
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$value}-pc {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties-with-important(
+            $value,
+            $class-properties,
+            #{"%"}
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties-with-important(
+              $value,
+              $class-properties,
+              #{"%"}
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin create-responsive-class-without-units-from-array-with-important(
+  $class-prop-name,
+  $available-values,
+  $class-properties
+) {
+  @each $or-grid-breakpoint,
+    $or-grid-breakpoint-value in $or-grid-breakpoints
+  {
+    @each $value in $available-values {
+      .or-#{$class-prop-name}#{if($or-grid-breakpoint==xs,"","-" + $or-grid-breakpoint)}-#{$value} {
+        @if ($or-grid-breakpoint == xs) {
+          @include create-responsive-class-properties-with-important(
+            $value,
+            $class-properties,
+            ""
+          );
+        } @else {
+          @include respond-above-breakpoint($or-grid-breakpoint) {
+            @include create-responsive-class-properties-with-important(
+              $value,
+              $class-properties,
+              ""
+            );
+          }
+        }
+      }
+    }
+  }
+}
