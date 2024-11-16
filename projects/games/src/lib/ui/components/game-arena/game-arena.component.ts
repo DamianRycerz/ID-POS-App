@@ -6,15 +6,16 @@ import {
   ShowWinnerCommandHandler,
 } from '../../../application/handlers';
 import { PlayerEnum } from '@core';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-game-arena',
   templateUrl: './game-arena.component.html',
+  styleUrls: ['./game-arena.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [AsyncPipe, NgIf],
+  imports: [AsyncPipe, NgIf, NgClass],
   providers: [
     SetPersonAttributesCommandHandler,
     SetShipDataCommandHandler,

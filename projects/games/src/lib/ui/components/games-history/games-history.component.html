@@ -1,18 +1,56 @@
 <ng-container *ngIf="history$ | async as history">
-  <ng-container *ngFor="let game of history.games; let i = index">
-    <div class="">
-      <div class="or-d-flex or-justify-content-between or-w-50-pc">
-        <div>{{ game.playerOneScore }}</div>
-        <div>Game: {{ i + 1 }}</div>
-        <div>{{ game.playerTwoScore }}</div>
+  <div class="or-d-flex or-justify-content-center or-w-100-pc">
+    <div
+      *ngIf="history.games?.length; else emptyHistory"
+      class="box-shadow or-p-20-px or-max-w-40-pc or-w-100-pc"
+    >
+      <div
+        class="or-head-xl or-text-align-center or-mb-20-px or-header-bottom-border"
+      >
+        Historia gier
+      </div>
+      <ng-container
+        *ngFor="let game of history.games; let i = index; let last = last"
+      >
+        <div
+          class="or-d-flex or-justify-content-between"
+          [class.or-mb-8-px]="!last"
+        >
+          <div
+            class="or-head-md"
+            [ngClass]="
+              game.playerOneScore > game.playerTwoScore
+                ? 'or-color-green'
+                : 'or-color-red'
+            "
+          >
+            {{ game.playerOneScore }}
+          </div>
+          <div class="or-head-md">Game: {{ i + 1 }}</div>
+          <div
+            class="or-head-md"
+            [ngClass]="
+              game.playerTwoScore > game.playerOneScore
+                ? 'or-color-green'
+                : 'or-color-red'
+            "
+          >
+            {{ game.playerTwoScore }}
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="or-divider or-my-12-px"></div>
+
+      <div class="or-d-flex or-justify-content-between">
+        <div class="or-head-md">{{ history.totalWin.playerOneTotalWin }}</div>
+        <div class="or-head-lg">TOTAL</div>
+        <div class="or-head-md">{{ history.totalWin.playerTwoTotalWin }}</div>
       </div>
     </div>
-
-  </ng-container>
-
-  <div  class="or-d-flex or-justify-content-between or-w-50-pc">
-    <div>{{ history.totalWin.playerOneTotalWin }}</div>
-    <div>TOTAL</div>
-    <div>{{history.totalWin.playerTwoTotalWin  }}</div>
   </div>
 </ng-container>
+
+<ng-template #emptyHistory>
+  <div class="or-head-lg">Bark historii gierek... Zagramy?</div>
+</ng-template>
