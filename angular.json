@@ -83,6 +83,35 @@
           }
         }
       }
+    },
+    "games": {
+      "projectType": "library",
+      "root": "projects/games",
+      "sourceRoot": "projects/games/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/games/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/games/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/games/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "./tsconfig.spec.json"
+          }
+        }
+      }
     }
   }
 }
