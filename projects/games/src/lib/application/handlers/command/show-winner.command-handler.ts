@@ -21,8 +21,8 @@ export class ShowWinnerCommandHandler {
       take(1),
       map(([playerOne, playerTwo]: [PlayerData, PlayerData]) => {
         return {
-          plyerOne: this.calculatePoints(playerOne),
-          playerTwo: this.calculatePoints(playerTwo),
+          playerOneScore: this.calculatePoints(playerOne),
+          playerTwoScore: this.calculatePoints(playerTwo),
         };
       }),
       switchMap((result: GameHistory) =>

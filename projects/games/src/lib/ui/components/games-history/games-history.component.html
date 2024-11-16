@@ -1,0 +1,18 @@
+<ng-container *ngIf="history$ | async as history">
+  <ng-container *ngFor="let game of history.games; let i = index">
+    <div class="">
+      <div class="or-d-flex or-justify-content-between or-w-50-pc">
+        <div>{{ game.playerOneScore }}</div>
+        <div>Game: {{ i + 1 }}</div>
+        <div>{{ game.playerTwoScore }}</div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <div  class="or-d-flex or-justify-content-between or-w-50-pc">
+    <div>{{ history.totalWin.playerOneTotalWin }}</div>
+    <div>TOTAL</div>
+    <div>{{history.totalWin.playerTwoTotalWin  }}</div>
+  </div>
+</ng-container>

@@ -1,4 +1,4 @@
 export interface GameHistory {
-  readonly plyerOne: number;
-  readonly playerTwo: number;
+  readonly playerOneScore: number;
+  readonly playerTwoScore: number;
 }

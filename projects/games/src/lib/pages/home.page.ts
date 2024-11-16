@@ -8,13 +8,14 @@ import {
   PeopleHttpService,
   ShipsHttpService,
 } from '../infrastructure/http-services';
+import { GamesHistoryComponent } from '../ui/components/games-history/games-history.component';
 
 @Component({
   selector: 'lib-home',
   templateUrl: './home.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [GameArenaComponent],
+  imports: [GameArenaComponent, GamesHistoryComponent],
   providers: [
     CurrentGameStorage,
     GamesHistoryStorage,
