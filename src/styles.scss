@@ -4,3 +4,12 @@
 @import "./design-system/display";
 @import "./design-system/cursor";
 @import "./design-system/fonts";
+
+
+.present-modal {
+  --border-radius: 10px 10px 10px 10px;
+  --height: auto !important;
+  --width: auto !important;
+  --background: #f3f3f6;
+  --backdrop-opacity: 80%;
+}
