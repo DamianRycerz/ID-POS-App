@@ -6,13 +6,14 @@ const INIT_STATE: PlayerData = {
   weight: 0,
   height: 0,
   crew: 0,
+  playerName: 'Damian',
 };
 
 export class CurrentGameStorage {
   private readonly playerOneSubject: BehaviorSubject<PlayerData> =
     new BehaviorSubject<PlayerData>(INIT_STATE);
   private readonly playerTwoSubject: BehaviorSubject<PlayerData> =
-    new BehaviorSubject<PlayerData>(INIT_STATE);
+    new BehaviorSubject<PlayerData>({ ...INIT_STATE, playerName: 'Tomek' });
 
   readonly playerOne$: Observable<PlayerData> =
     this.playerOneSubject.asObservable();

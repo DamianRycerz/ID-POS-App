@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { SetPersonAttributesCommandHandler } from '../../../application/handlers';
+import {
+  SetPersonAttributesCommandHandler,
+  SetShipDataCommandHandler,
+} from '../../../application/handlers';
 import { PlayerEnum } from '@core';
 
 @Component({
@@ -8,21 +11,35 @@ import { PlayerEnum } from '@core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [],
-  providers: [SetPersonAttributesCommandHandler],
+  providers: [SetPersonAttributesCommandHandler, SetShipDataCommandHandler],
 })
 export class GameArenaComponent {
   private readonly setPersonAttributesCommandHandler: SetPersonAttributesCommandHandler =
     inject(SetPersonAttributesCommandHandler);
+  private readonly setShipDataCommandHandler: SetShipDataCommandHandler =
+    inject(SetShipDataCommandHandler);
 
-  setPlayer1() {
+  setPlayer1Attiributes() {
     this.setPersonAttributesCommandHandler
       .setAttributes(PlayerEnum.PLAYER_ONE)
       .subscribe();
   }
 
-  setPlayer2() {
+  setPlayer2Attributes() {
     this.setPersonAttributesCommandHandler
       .setAttributes(PlayerEnum.PLAYER_TWO)
+      .subscribe();
+  }
+
+  setPlayer1ShipData() {
+    this.setShipDataCommandHandler
+      .setShipData(PlayerEnum.PLAYER_ONE)
+      .subscribe();
+  }
+
+  setPlayer2ShipData() {
+    this.setShipDataCommandHandler
+      .setShipData(PlayerEnum.PLAYER_TWO)
       .subscribe();
   }
 }
