@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideIonicAngular } from '@ionic/angular/standalone';
-import { IonModalService } from '../../projects/core/src/lib/services';
+import { IonModalService } from '@core';
 
 export const appConfig: ApplicationConfig = {
   providers: [

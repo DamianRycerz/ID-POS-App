@@ -3,8 +3,9 @@
     <div *ngIf="history.games?.length; else emptyHistory" class="box-shadow or-p-20-px or-max-w-40-pc or-w-100-pc">
       <div
         class="or-d-flex or-align-items-center or-justify-content-between or-mb-20-px or-header-bottom-border or-pb-4-px">
-        <div class="or-head-xl">Historia gier</div>
         <div (click)="clearGamesHistory()" class="or-head-xs or-cursor-pointer">Wyczyść historię</div>
+        <div class="or-head-xl">Historia gier</div>
+        <div (click)="exportToFile()" class="or-head-xs or-cursor-pointer">Zapisz historię</div>
       </div>
       <ng-container *ngFor="let game of history.games; let i = index; let last = last">
         <div class="or-d-flex or-justify-content-between" [class.or-mb-8-px]="!last">
