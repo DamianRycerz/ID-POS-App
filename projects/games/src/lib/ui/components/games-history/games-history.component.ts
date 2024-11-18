@@ -6,7 +6,7 @@ import {
 } from '../../../application/handlers';
 import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
-import { GameHistoryModel } from '../../../application/models/game-history.model';
+import { GameHistoryModel } from '../../../application/models';
 
 @Component({
   selector: 'lib-games-history',
