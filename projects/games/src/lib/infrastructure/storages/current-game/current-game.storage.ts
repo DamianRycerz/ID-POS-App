@@ -5,8 +5,7 @@ import { PlayerEnum } from '@core';
 const INIT_STATE: PlayerData = {
   weight: 0,
   height: 0,
-  crew: 0,
-  playerName: 'Damian'
+  crew: 0
 };
 
 export class CurrentGameStorage {

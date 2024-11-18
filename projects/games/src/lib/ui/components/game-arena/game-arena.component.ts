@@ -54,17 +54,11 @@ export class GameArenaComponent {
   }
 
   showWinner(): void {
-    this.showWinnerCommandHandler
-      .show()
-      .pipe(
-        take(1),
-        switchMap((result) => this.showWinnerModal(result))
-      )
-      .subscribe();
+    this.showWinnerCommandHandler.show().subscribe((result: GameHistory) => this.showWinnerModal(result));
   }
 
   private showWinnerModal(result: GameHistory) {
-    const winner = result.playerOneScore > result.playerTwoScore ? 'Gracz 1' : 'Gracz 2';
+    const winner: string = result.playerOneScore > result.playerTwoScore ? 'Gracz 1' : 'Gracz 2';
 
     return this.modalProvider.showModal({
       component: WinnerModalComponent,
