@@ -8,3 +8,4 @@ export * from './command/export-games-history.command-handler';
 // QUERY
 export * from './query/is-show-winner-active.query-handler';
 export * from './query/get-games-history.query-handler';
+export * from './query/expected-steps-completed.query-handler';

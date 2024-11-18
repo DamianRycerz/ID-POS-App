@@ -1,6 +1,7 @@
 <ng-container
   *ngIf="{
-    isShowWinnerActive: isShowWinnerActive$ | async
+    isShowWinnerActive: isShowWinnerActive$ | async,
+    expectedStepsCompleted: expectedStepsCompleted$ | async
   } as data">
   <div class="or-d-flex or-justify-content-between or-align-items-center or-p-12-px">
     <div class="or-d-flex or-flex-col or-align-items-center or-justify-content-center">
@@ -8,10 +9,24 @@
       <img src="assets/player-one.svg" class="or-responsive-img" />
       <button
         (click)="setPlayer1Attiributes()"
-        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer">
+        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer"
+        [disabled]="data.expectedStepsCompleted?.playerOneAttributes"
+        [ngClass]="
+          data.expectedStepsCompleted?.playerOneAttributes
+            ? 'or-cursor-not-allowed or-action-button-disabled'
+            : ''
+        ">
         Losuj kartę!
       </button>
-      <button (click)="setPlayer1ShipData()" class="or-action-button or-p-4-px or-head-sm or-cursor-pointer">
+      <button
+        (click)="setPlayer1ShipData()"
+        class="or-action-button or-p-4-px or-head-sm or-cursor-pointer"
+        [disabled]="data.expectedStepsCompleted?.playerOneCrew"
+        [ngClass]="
+          data.expectedStepsCompleted?.playerOneCrew
+            ? 'or-cursor-not-allowed or-action-button-disabled'
+            : ''
+        ">
         Wezwij swoją załogę!
       </button>
     </div>
@@ -33,10 +48,24 @@
       <img src="assets/player-two.svg" class="or-responsive-img" />
       <button
         (click)="setPlayer2Attributes()"
-        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer">
+        class="or-action-button or-p-4-px or-head-sm or-my-8-px or-cursor-pointer"
+        [disabled]="data.expectedStepsCompleted?.playerTwoAttributes"
+        [ngClass]="
+          data.expectedStepsCompleted?.playerTwoAttributes
+            ? 'or-cursor-not-allowed or-action-button-disabled'
+            : ''
+        ">
         Losuj kartę!
       </button>
-      <button (click)="setPlayer2ShipData()" class="or-action-button or-p-4-px or-head-sm or-cursor-pointer">
+      <button
+        (click)="setPlayer2ShipData()"
+        class="or-action-button or-p-4-px or-head-sm or-cursor-pointer"
+        [disabled]="data.expectedStepsCompleted?.playerTwoCrew"
+        [ngClass]="
+          data.expectedStepsCompleted?.playerTwoCrew
+            ? 'or-cursor-not-allowed or-action-button-disabled'
+            : ''
+        ">
         Wezwij swoją załogę!
       </button>
     </div>
