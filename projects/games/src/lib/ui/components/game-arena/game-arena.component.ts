@@ -5,9 +5,11 @@ import {
   SetShipDataCommandHandler,
   ShowWinnerCommandHandler
 } from '../../../application/handlers';
-import { PlayerEnum } from '@core';
+import { MODAL_TOKEN, ModalProvider, PlayerEnum } from '@core';
 import { AsyncPipe, NgClass, NgIf } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, take } from 'rxjs';
+import { GameHistory } from '../../../infrastructure/storages';
+import { WinnerModalComponent } from '../winner-modal/winner-modal.component';
 
 @Component({
   selector: 'lib-game-arena',
@@ -31,6 +33,7 @@ export class GameArenaComponent {
   private readonly showWinnerCommandHandler: ShowWinnerCommandHandler = inject(ShowWinnerCommandHandler);
   private readonly isShowWinnerActiveQueryHandler: IsShowWinnerActiveQueryHandler =
     inject(IsShowWinnerActiveQueryHandler);
+  private readonly modalProvider: ModalProvider = inject(MODAL_TOKEN);
 
   readonly isShowWinnerActive$: Observable<boolean> = this.isShowWinnerActiveQueryHandler.isShowWinnerActive();
 
@@ -51,6 +54,22 @@ export class GameArenaComponent {
   }
 
   showWinner(): void {
-    this.showWinnerCommandHandler.show().subscribe();
+    this.showWinnerCommandHandler
+      .show()
+      .pipe(
+        take(1),
+        switchMap((result) => this.showWinnerModal(result))
+      )
+      .subscribe();
+  }
+
+  private showWinnerModal(result: GameHistory) {
+    const winner = result.playerOneScore > result.playerTwoScore ? 'Gracz 1' : 'Gracz 2';
+
+    return this.modalProvider.showModal({
+      component: WinnerModalComponent,
+      cssClass: 'present-modal',
+      componentProps: { winner: winner }
+    });
   }
 }

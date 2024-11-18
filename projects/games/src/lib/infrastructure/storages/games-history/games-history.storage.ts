@@ -6,11 +6,11 @@ export class GamesHistoryStorage {
 
   readonly gameHistory$: Observable<GameHistory[]> = this.gameHistorySubject.asObservable();
 
-  addResult(result: GameHistory): Observable<void> {
+  addResult(result: GameHistory): Observable<GameHistory> {
     return this.gameHistory$.pipe(
       take(1),
       tap((actual: GameHistory[]) => this.gameHistorySubject.next([...actual, result])),
-      map(() => void 0)
+      map(() => result)
     );
   }
 

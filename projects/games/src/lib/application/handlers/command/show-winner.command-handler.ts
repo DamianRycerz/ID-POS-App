@@ -6,7 +6,7 @@ export class ShowWinnerCommandHandler {
   private readonly currentGameStorage: CurrentGameStorage = inject(CurrentGameStorage);
   private readonly gamesHistoryStorage: GamesHistoryStorage = inject(GamesHistoryStorage);
 
-  show(): Observable<void> {
+  show(): Observable<GameHistory> {
     return combineLatest([this.currentGameStorage.playerOne$, this.currentGameStorage.playerTwo$]).pipe(
       take(1),
       map(([playerOne, playerTwo]: [PlayerData, PlayerData]) => {
