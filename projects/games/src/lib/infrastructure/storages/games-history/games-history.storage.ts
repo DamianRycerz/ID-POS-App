@@ -6,14 +6,10 @@ export class GamesHistoryStorage {
 
   readonly gameHistory$: Observable<GameHistory[]> = this.gameHistorySubject.asObservable();
 
-  constructor() {
-    this.gameHistory$.subscribe((x) => console.log(x));
-  }
-
   addResult(result: GameHistory): Observable<void> {
     return this.gameHistory$.pipe(
       take(1),
-      tap((actual) => this.gameHistorySubject.next([...actual, result])),
+      tap((actual: GameHistory[]) => this.gameHistorySubject.next([...actual, result])),
       map(() => void 0)
     );
   }

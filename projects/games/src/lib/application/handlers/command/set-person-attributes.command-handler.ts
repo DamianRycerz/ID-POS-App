@@ -2,12 +2,13 @@ import { PeopleHttpService, PersonDTO } from '../../../infrastructure/http-servi
 import { inject } from '@angular/core';
 import { CurrentGameStorage } from '../../../infrastructure/storages';
 import { EMPTY, map, Observable, of, switchMap } from 'rxjs';
-import { PlayerEnum } from '@core';
+import { ErrorModalComponent, MODAL_TOKEN, ModalProvider, PlayerEnum } from '@core';
 import { PersonAttributesModel } from '../../models';
 
 export class SetPersonAttributesCommandHandler {
   private readonly peopleHttpService: PeopleHttpService = inject(PeopleHttpService);
   private readonly currentGameStorage: CurrentGameStorage = inject(CurrentGameStorage);
+  private readonly modalProvider: ModalProvider = inject(MODAL_TOKEN);
 
   setAttributes(selectedPlayer: PlayerEnum): Observable<void> {
     const randomId: number = Math.floor(Math.random() * 100);
@@ -15,11 +16,7 @@ export class SetPersonAttributesCommandHandler {
     return this.peopleHttpService.getPerson(randomId).pipe(
       map((person: PersonDTO) => this.mapToPlayerData(person)),
       switchMap((data: PersonAttributesModel) => {
-        if (!data.weight || !data.height) {
-          // zakladam ze w zasadach gry 0 jest postacia niekompletna i nalezy powtorzyc losowanie
-          console.error('TWOJA POSTAC JEST NIEKOMPLETNA');
-          return EMPTY;
-        }
+        if (!data.weight || !data.height) return this.errorMessage();
 
         return of(data);
       }),
@@ -28,10 +25,20 @@ export class SetPersonAttributesCommandHandler {
     );
   }
 
-  private mapToPlayerData(person: PersonDTO) {
+  private mapToPlayerData(person: PersonDTO): PersonAttributesModel {
     return {
       weight: +person.result.properties.mass,
       height: +person.result.properties.height
     };
+  }
+
+  private errorMessage(): Observable<never> {
+    return this.modalProvider
+      .showModal({
+        component: ErrorModalComponent,
+        cssClass: 'present-modal',
+        componentProps: { errorMessage: 'Twoja postać jest niekompletna. Spróbuj jeszcze raz' }
+      })
+      .pipe(switchMap(() => EMPTY));
   }
 }

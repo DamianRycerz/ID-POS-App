@@ -1,25 +1,6 @@
 {
   "name": "idpos-app",
   "version": "0.0.0",
-  "prettier": {
-    "singleQuote": true,
-    "semi": true,
-    "printWidth": 120,
-    "trailingComma": "none",
-    "tabWidth": 2,
-    "endOfLine": "auto",
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "bracketSameLine": true,
-          "parser": "html",
-          "printWidth": 120,
-          "tabWidth": 2
-        }
-      }
-    ]
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -48,5 +29,24 @@
     "@angular/compiler-cli": "^18.2.0",
     "prettier": "^2.8.4",
     "typescript": "~5.5.2"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "printWidth": 120,
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "endOfLine": "auto",
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "bracketSameLine": true,
+          "parser": "html",
+          "printWidth": 120,
+          "tabWidth": 2
+        }
+      }
+    ]
   }
 }
